@@ -9,9 +9,9 @@ struct base                       //To be used in class Team
 };
 struct player                     //To be used in class Team
 {
-	char _name[30];
-	int j_no;
-	char _team[20];
+	char NAME[30];
+	int JNO;
+	char TEAM[20];
 };
 
 class Team
@@ -32,35 +32,95 @@ class Team
 	int podium;               //Podium Finishes
 	char STname[20];          //Short Team Name
 public:
-	void Short();
-
-};
-void Team::Short()
+	void Short()
 	{
-		clrscr();
-		cout<<"\t"<<STname<<"\t"<<a._name<<"\n\t";
-		for(int i=0;i<strlen(STname);i++)
-		{	cout<<" ";
-		}
-		cout<<"\t"<<b._name<<"\n"<<"_____________________________\n\t";
-		cout<<"Podium Finishes          "<<podium<<"\n\t";
-		cout<<"____________________________";
-		cout<<"Championship Titles      "<<champs<<"\n";
+	gotoxy(7,2);
+	cout<<STname;
+	gotoxy(5,4);
+	cout<<a.NAME;
+	gotoxy(5,5);
+	cout<<b.NAME;
+	gotoxy(30,2);
+	cout<<"Podium";
+	gotoxy(32,3);
+	cout<<"Finishes";
+	gotoxy(45,3);
+	cout<<podium;
+	gotoxy(28,4);
+	cout<<"______________________";
+	gotoxy(30,6);
+	cout<<"Championship";
+	gotoxy(32,7);
+	cout<<"Titles";
+	gotoxy(45,6);
+	cout<<champs;
+	}
+	void Long()
+	{
+	cout<<"Full Team Name:";
+	gotoxy(25,1);
+	cout<<FTname<<endl;
+	cout<<"Base:";
+	gotoxy(25,2);
+	cout<<area.city<<", "<<area.country<<endl;
+	cout<<"Team Chief:";
+	gotoxy(25,3);
+	cout<<team_chief<<endl;
+	cout<<"Technical Chief:";
+	gotoxy(25,4);
+	cout<<tech_chief<<endl;
+	cout<<"Chassis:";
+	gotoxy(25,5);
+	cout<<chasi<<endl;
+	cout<<"Power Unit:";
+	gotoxy(25,6);
+	cout<<p_unit<<endl;
+	cout<<"First Team Entry:";
+	gotoxy(25,7);
+	cout<<t_entry<<endl;
+	cout<<"World Championship:";
+	gotoxy(25,8);
+	cout<<champs<<endl;
+	cout<<"Highest Race Finish:";
+	gotoxy(25,9);
+	cout<<finish<<endl;
+	cout<<"Pole Positions:";
+	gotoxy(25,10);
+	cout<<pole<<endl;
+	cout<<"Fastest Laps:";
+	gotoxy(25,11);
+	cout<<fast_lap<<"\n\n";
+
+	cout<<a.JNO<<"\n"<<a.NAME<<"\n"<<a.TEAM;
+	gotoxy(20,13);
+	cout<<b.JNO;
+	gotoxy(20,14);
+	cout<<b.NAME;
+	gotoxy(20,15);
+	cout<<b.TEAM;
 	}
 
+};
 void main()
 {
+	clrscr();
 	Team x;
-	int y;
+	char y;
 	ifstream fin;
 	fin.open("TEAM.DAT",ios::binary|ios::in);
 	if(!fin)
 		cout<<"File does not exist";
 	for(int i=0;i<11;i++)
 	{
+		clrscr();
 		fin.read((char*)&x,sizeof(Team));
 		x.Short();
 		cin>>y;
+		if(y==13)
+			x.Long();
+
 	}
 	fin.close();
+	getch();
+
 }
