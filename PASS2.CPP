@@ -6,6 +6,7 @@ class user
 	{
 		char uname[50];
 		char pass[22];
+		char ch;
 
 		public :
 
@@ -16,11 +17,11 @@ class user
 			{
 				gets(uname);
 			}
-		void gp()
-			{
-				gets(pass);
-			}
-};
+		void gp();
+		void ux();
+}ob1;
+
+int m , n , k;
 
 char* user::pp()
 	{
@@ -30,12 +31,70 @@ char* user::pu()
 	{
 		return uname;
 	}
+void user::gp()
+	{
+		for (int num = 0 ; num < 9 ; num++)
+		{
+	     z:		ch = getch();
+			if(ch == 8)
+				{
+					k = wherex();
+					gotoxy(k - 1, wherey());
+					cout<<" ";
+					gotoxy(k - 1, wherey());
+					--num;
+					goto z;
+				}
+			else if(ch == 13)
+				break;
+			else
+			{
+			cout<<"*";
+			pass[num] = ch;
+			}
+		}
+	}
+
+
+
+void user::ux()
+	{
+		clrscr();
+		cout<<"\n\n\n\n\n\n\n\n";
+		cout<<"\t\t\t*************************\n";
+		for(int j = 0 ; j < 2 ; j++)
+			{
+				cout<<"\t\t\t*";
+				m =  wherex();
+				n = wherey();
+				if (j == 0)
+				{
+					cout<<"Username : ";
+					gotoxy((m + 23), n);
+					cout<<"*\n";
+				}
+				else if (j == 1)
+				{
+					cout<<"Password : ";
+					gotoxy((m + 23), n);
+					cout<<"*\n";
+				}
+			}
+		cout<<"\t\t\t*************************\n";
+
+
+}
+
 void login()
 	{
-		user ob , ob1;
+		user ob ;
 		ifstream fs;
+		ob1.ux();
+		gotoxy((m + 11) , (n - 1));
 		ob1.gu();
+		gotoxy((m + 11) , n) ;
 		ob1.gp();
+		getch();
 		fs.open("newuser.dat",ios::binary|ios::in);
 		int flag  = 0;
 		while (fs)
@@ -57,15 +116,48 @@ void login()
 	}
 void signup()
 	{
+		char pass2[10];
+		int flag = 0;
+	    y:	clrscr();
 		user ob;
-		ob.gu();
-		ob.gp();
-		ofstream fs;
-		fs.open("newuser.dat",ios::out|ios::binary|ios::ate);
-		fs.write((char*)&ob,sizeof(ob));
+		cout<<"\n\n\t\tEnter Desired Username : ";
+		ob1.gu();
+		ifstream fin;
+		fin.open("newuser.dat",ios::binary|ios::in);
+		while (fin)
+		{
+		fin.read((char*)&ob , sizeof(ob));
+		if(strcmp(ob1.pu(),ob.pu()) == 0)
+			{
+			  cout<<"\nThis Username Is Already Registered";
+			  cout<<"\nPress Any Key To Continue";
+			  getch();
+			  goto y;
+			}
+		}
+		cout<<"\n\n\t\tEnter Password (Less Than 9 Character)  : ";
+		ob1.gp();
+		cout<<"\n\n\t\tEnter Password Again : ";
+		gets(pass2);
+		if(strcmp(ob1.pp(),pass2) != 0)
+			{
+			cout<<"\nBoth The Passwords Must Match !!!";
+			cout<<"\nPress Any Key To Continue";
+			getch();
+			goto y;
+		}
+		fin.close();
+		ofstream fout;
+		fout.open("newuser.dat",ios::out|ios::binary|ios::ate);
+		fout.write((char*)&ob1,sizeof(ob1));
+		fout.close();
+		cout<<"\nAll Done ";
+		getch();
+
 	}
-void main()
+ void main()
 {
+	clrscr();
 	cout<<"\n\n\n\t\t1\tSignup";
 	cout<<"\n\t\t2\tLogin\n";
 	int x;
@@ -75,4 +167,5 @@ void main()
 	else if (x == 2)
 		login();
 }
+
 
