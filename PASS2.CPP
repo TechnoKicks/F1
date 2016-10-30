@@ -53,6 +53,7 @@ void user::gp()
 			pass[num] = ch;
 			}
 		}
+		cout<<pass;
 	}
 
 
@@ -123,7 +124,7 @@ void signup()
 		cout<<"\n\n\t\tEnter Desired Username : ";
 		ob1.gu();
 		ifstream fin;
-		fin.open("newuser.dat",ios::binary|ios::in);
+		fin.open("	newuser.dat",ios::binary|ios::in);
 		while (fin)
 		{
 		fin.read((char*)&ob , sizeof(ob));

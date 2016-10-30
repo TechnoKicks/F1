@@ -1,7 +1,3 @@
-#include<fstream.h>
-#include<conio.h>
-#include<string.h>
-#include<stdio.h>
 class user
 	{
 		char uname[50];
@@ -9,6 +5,11 @@ class user
 		char ch;
 
 		public :
+
+		user()
+			{
+			  strcpy(uname,"Guest");
+			}
 
 		char* pp();
 		char* pu();
@@ -19,6 +20,8 @@ class user
 			}
 		void gp();
 		void ux();
+
+		char* chk();
 }ob1;
 
 int m , n , k;
@@ -28,6 +31,11 @@ char* user::pp()
 		return pass;
 	}
 char* user::pu()
+	{
+		return uname;
+	}
+
+char* user::chk()
 	{
 		return uname;
 	}
@@ -53,6 +61,7 @@ void user::gp()
 			pass[num] = ch;
 			}
 		}
+		cout<<pass;
 	}
 
 
@@ -123,7 +132,7 @@ void signup()
 		cout<<"\n\n\t\tEnter Desired Username : ";
 		ob1.gu();
 		ifstream fin;
-		fin.open("	newuser.dat",ios::binary|ios::in);
+		fin.open("newuser.dat",ios::binary|ios::in);
 		while (fin)
 		{
 		fin.read((char*)&ob , sizeof(ob));
@@ -155,17 +164,6 @@ void signup()
 		getch();
 
 	}
- void main()
-{
-	clrscr();
-	cout<<"\n\n\n\t\t1\tSignup";
-	cout<<"\n\t\t2\tLogin\n";
-	int x;
-	cin>>x;
-	if (x == 1)
-		signup();
-	else if (x == 2)
-		login();
-}
+
 
 
