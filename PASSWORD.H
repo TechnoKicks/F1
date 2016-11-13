@@ -1,15 +1,12 @@
+int flag;
+char uname_d[] = "Guest";
+char ch;
 class user
 	{
 		char uname[50];
 		char pass[22];
-		char ch;
 
 		public :
-
-		user()
-			{
-			  strcpy(uname,"Guest");
-			}
 
 		char* pp();
 		char* pu();
@@ -20,8 +17,9 @@ class user
 			}
 		void gp();
 		void ux();
+		int chk();
 
-		char* chk();
+		char* runame();
 }ob1;
 
 int m , n , k;
@@ -35,9 +33,19 @@ char* user::pu()
 		return uname;
 	}
 
-char* user::chk()
+int user::chk()
 	{
+		if (flag == 1)
+			return 1;
+		else
+			return 0;
+	}
+char* user::runame()
+	{
+		if (chk() == 1)
 		return uname;
+		else
+		return uname_d;
 	}
 void user::gp()
 	{
@@ -62,6 +70,7 @@ void user::gp()
 			}
 		}
 		cout<<pass;
+
 	}
 
 
@@ -105,7 +114,6 @@ void login()
 		ob1.gp();
 		getch();
 		fs.open("newuser.dat",ios::binary|ios::in);
-		int flag  = 0;
 		while (fs)
 		{
 		fs.read((char*)&ob , sizeof(ob));
@@ -114,13 +122,16 @@ void login()
 				clrscr();
 				cout<<"Login Successful";
 				flag = 1;
+				getch();
 				break;
+
 			}
 		}
 		if (flag == 0)
 			{
 				clrscr();
 				cout<<"ACESS DENIED";
+				getch();
 			}
 	}
 void signup()

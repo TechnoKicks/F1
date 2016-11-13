@@ -1,4 +1,4 @@
-#include"password.h"
+
 int op;
 void load()
 {       int x, y, i;
@@ -169,29 +169,4 @@ void start()
 {
 	load();
 
-x:	clrscr();
-	cout<<"\n\n\n\tHey There , Wanna Sign Up ???  \n\n\n" ;
-	cout<<"\t\tSinging Up Has Its Own Advantages :\n\n";
-	cout<<"\t\t\t * Get Live Booking Option\n";
-	cout<<"\t\t\t * Access To Editing Option Of The Database\n";
-	cout<<"\t\t\t * And Few Surprises ";
-	cout<<"\n\n\n";
-	cout<<"\t\t\t1) Yea Sure , Why Not...\n";
-	cout<<"\t\t\t2) Nah , Any Other Day..\n";
-	cout<<"\t\t\t3) I Already Have An Account\n\t\t";
-	cout<<"\n\t\tEnter Your Choice : ";
-	cin>>op;
-		if (op == 1)
-			signup();
-		else if (op == 2)
-			home();
-		else if(op == 3 )
-			login();
-		else
-			{
-				cout<<"\nPlease Enter Correct Choice";
-				cout<<"\nPress Any Key ";
-				getch();
-				goto x;
-			}
 }

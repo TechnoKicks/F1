@@ -1,3 +1,4 @@
+/*These Are The Header Files For Pre Defined Functions*/
 #include<fstream.h>
 #include<dos.h>
 #include<conio.h>
@@ -8,6 +9,11 @@
 
 /*These Are Supporting Header Files */
 #include"loading.h"
+#include"password.h"
+
+/*These Are The Global Variables Used In Program*/
+int getop;
+int op;
 
 /* These Are All The Functions used in program */
 void start1();
@@ -16,17 +22,48 @@ void home();
 void home()
 {
 	clrscr();
-	cout<<"\t\t\t\tHey , "<<ob1.chk();
+	cout<<"\t\t\t\tHey , "<<ob1.runame();
 	cout<<"\n\n\n\n\n\n";
 	cout<<"\t\t1) Leaderboards\n\n";
 	cout<<"\t\t2) Player Database\n\n";
 	cout<<"\t\t3) Upcoming Events \n\n";
 	cout<<"\t\t4) My Profile";
-	getch();
+	getop = getch();
+	switch(getop) {}
 }
 
+void start1()
+{
+
+x:	clrscr();
+	cout<<"\n\n\n\tHey There , Wanna Sign Up ???  \n\n\n" ;
+	cout<<"\t\tSinging Up Has Its Own Advantages :\n\n";
+	cout<<"\t\t\t * Get Live Booking Option\n";
+	cout<<"\t\t\t * Access To Editing Option Of The Database\n";
+	cout<<"\t\t\t * And Few Surprises ";
+	cout<<"\n\n\n";
+	cout<<"\t\t\t1) Yea Sure , Why Not...\n";
+	cout<<"\t\t\t2) Nah , Any Other Day..\n";
+	cout<<"\t\t\t3) I Already Have An Account\n\t\t";
+	cout<<"\n\t\tEnter Your Choice : ";
+	cin>>getop;
+		if (getop == 1)
+			signup();
+		else if (getop == 2)
+			{}
+		else if(getop == 3 )
+			login();
+		else
+			{
+				cout<<"\nPlease Enter Correct Choice";
+				cout<<"\nPress Any Key ";
+				getch();
+				goto x;
+			}
+}
 void main()
 {
 	start();
+	start1();
 	home();
 }
