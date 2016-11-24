@@ -1,13 +1,23 @@
 int flag;
-char uname_d[] = "Guest";
 char ch;
 class user
 	{
-		char uname[50];
 		char pass[22];
+
+		protected :
+
+		char email[30];
+		char phone[11];
+		char uname[50];
 
 		public :
 
+		user()
+			{
+				strcpy(uname,"Guest");
+			}
+		int ge();
+		void gphone();
 		char* pp();
 		char* pu();
 
@@ -20,10 +30,17 @@ class user
 		int chk();
 
 		char* runame();
-}ob1;
+		char* remail();
+
+		void logout();
+}usr;
 
 int m , n , k;
 
+char* user::remail()
+	{
+		return email;
+	}
 char* user::pp()
 	{
 		return pass;
@@ -42,11 +59,35 @@ int user::chk()
 	}
 char* user::runame()
 	{
-		if (chk() == 1)
+		if (chk() == 0)
+		{
+			strcpy(uname,"Guest");
+		}
+
 		return uname;
-		else
-		return uname_d;
 	}
+int user::ge()
+{
+	int t;
+	int u;
+	gets(email);
+	for (int i = 0  ; i!='/0' ; i++)
+	{	if(email[i] == '@')
+			t++;
+		if (email[i] == '.')
+			u++;
+	}
+	if (t == 0 || u == 0)
+		return 1;
+	else
+		return 0;
+}
+
+void user::gphone()
+{
+    gets(phone);
+}
+
 void user::gp()
 	{
 		for (int num = 0 ; num < 9 ; num++)
@@ -54,11 +95,7 @@ void user::gp()
 	     z:		ch = getch();
 			if(ch == 8)
 				{
-					k = wherex();
-					gotoxy(k - 1, wherey());
-					cout<<" ";
-					gotoxy(k - 1, wherey());
-					--num;
+					cout<<"\b \b";
 					goto z;
 				}
 			else if(ch == 13)
@@ -69,7 +106,6 @@ void user::gp()
 			pass[num] = ch;
 			}
 		}
-		cout<<pass;
 
 	}
 
@@ -107,17 +143,17 @@ void login()
 	{
 		user ob ;
 		ifstream fs;
-		ob1.ux();
+		usr.ux();
 		gotoxy((m + 11) , (n - 1));
-		ob1.gu();
+		usr.gu();
 		gotoxy((m + 11) , n) ;
-		ob1.gp();
+		usr.gp();
 		getch();
 		fs.open("newuser.dat",ios::binary|ios::in);
 		while (fs)
 		{
 		fs.read((char*)&ob , sizeof(ob));
-		if (strcmp(ob.pp(),ob1.pp()) == 0 && strcmp(ob.pu(),ob1.pu()) == 0)
+		if (strcmp(ob.pp(),usr.pp()) == 0 && strcmp(ob.pu(),usr.pu()) == 0)
 			{
 				clrscr();
 				cout<<"Login Successful";
@@ -136,18 +172,17 @@ void login()
 	}
 void signup()
 	{
-		char pass2[10];
-		int flag = 0;
+		char pass2[22];
 	    y:	clrscr();
 		user ob;
 		cout<<"\n\n\t\tEnter Desired Username : ";
-		ob1.gu();
+		usr.gu();
 		ifstream fin;
 		fin.open("newuser.dat",ios::binary|ios::in);
 		while (fin)
 		{
 		fin.read((char*)&ob , sizeof(ob));
-		if(strcmp(ob1.pu(),ob.pu()) == 0)
+		if(strcmp(usr.pu(),ob.pu()) == 0)
 			{
 			  cout<<"\nThis Username Is Already Registered";
 			  cout<<"\nPress Any Key To Continue";
@@ -156,25 +191,68 @@ void signup()
 			}
 		}
 		cout<<"\n\n\t\tEnter Password (Less Than 9 Character)  : ";
-		ob1.gp();
+		usr.gp();
 		cout<<"\n\n\t\tEnter Password Again : ";
-		gets(pass2);
-		if(strcmp(ob1.pp(),pass2) != 0)
+		char ch;
+		for (int num = 0 ; num < 9 ; num++)
+		{
+	     z:		ch = getch();
+			if(ch == 8)
+				{
+					cout<<"\b \b";
+					goto z;
+				}
+			else if(ch == 13)
+				break;
+			else
+			{
+			cout<<"*";
+			pass2[num] = ch;
+			}
+		}
+
+		if(strcmp(usr.pp(),pass2) != 0)
 			{
 			cout<<"\nBoth The Passwords Must Match !!!";
 			cout<<"\nPress Any Key To Continue";
 			getch();
 			goto y;
 		}
+ u:		int q = wherex();
+		int s = wherey();
+		cout<<"\n\n\t\tEnter Your Email ID : ";
+		int b = usr.ge();
+		if (b > 0)
+		       {
+			cout<<"\nPlease Use Correct Email Address ";
+			getch();
+			gotoxy(q,s);
+			goto u;
+			}
+
+		q = wherex();
+		s = wherey();
+		cout<<"\n\t\tEnter Your Phone Number : ";
+		usr.gphone();
+
 		fin.close();
 		ofstream fout;
 		fout.open("newuser.dat",ios::out|ios::binary|ios::ate);
-		fout.write((char*)&ob1,sizeof(ob1));
+		fout.write((char*)&usr,sizeof(usr));
 		fout.close();
-		cout<<"\nAll Done ";
+		cout<<"\n\t\tAll Done ";
+		flag = 1;
 		getch();
 
-	}
-
+}
+void user::logout()
+{
+	strcpy(uname,"Guest");
+	user ob;
+	ofstream fout;
+	fout.open("loggedin.dat",ios::binary|ios::out);
+	fout.write((char*)&ob,sizeof(ob));
+	fout.close();
+}
 
 
