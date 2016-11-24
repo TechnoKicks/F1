@@ -195,7 +195,7 @@ void show_player()
 	textbackground(BLACK);
 	clrscr();
 
-	char ch;
+	char cc;
 	Player X;
 	ifstream fin;
 	fin.open("PLAYER.DAT",ios::binary|ios::in);
@@ -210,10 +210,10 @@ void show_player()
 		X.DISP();
 		while(1>0)
 		{
-		ch  = getch();
-		if (ch == 13)
+		cc  = getch();
+		if (cc == 13)
 			break;
-		else if (ch == 27)
+		else if (cc == 27)
 			goto m;
 		}
 

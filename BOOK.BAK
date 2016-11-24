@@ -330,9 +330,9 @@ void pay(char wing, int count)
 	gets(credit);
 	cout<<"\tCard Number  	      :   ";
 	gets(credit);
-	cout<<"\tCVV                  :   ";
+	cout<<"\tCVV                   :   ";
 	gets(credit);
-	cout<<"\tExpiry Date (MM/YYYY):   ";
+	cout<<"\tExpiry Date (MM/YYYY) :   ";
 	gets(credit);
 
 	cout<<"\n\n Your Tickets has been sent to your email";

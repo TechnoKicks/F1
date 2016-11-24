@@ -80,7 +80,7 @@ g:	clrscr();
 			else
 				{
 					clrscr();
-					gotoxy(30,12);
+					gotoxy(25,12);
 					cout<<"Seems Like Youre Not Logged In.";
 					gotoxy(30,13);
 					cout<<"Press Any Key To Continue";
@@ -95,7 +95,7 @@ g:	clrscr();
 			else
 				{
 					clrscr();
-					gotoxy(30,12);
+					gotoxy(25,12);
 					cout<<"Seems Like Youre Not Logged In.";
 					gotoxy(30,13);
 					cout<<"Press Any Key To Continue";
@@ -168,7 +168,7 @@ x:	clrscr();
 }
 void main()
 {
-       //	start();
+	start();
 	start1();
 	home();
 }

@@ -271,7 +271,7 @@ void book()
 
 void pay(char wing, int count)
 {
-	long int sum=0;
+	double  sum=0;
 	char ch;
 	if(wing==1)
 	{

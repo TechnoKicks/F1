@@ -168,7 +168,7 @@ x:	clrscr();
 }
 void main()
 {
-       //	start();
+	start();
 	start1();
 	home();
 }

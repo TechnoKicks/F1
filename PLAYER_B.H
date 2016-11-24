@@ -206,6 +206,7 @@ void show_player()
 		cout<<"Press Enter To Continue";
 		gotoxy(50,24);
 		cout<<"Press Esc To Exit";
+		gotoxy(1,1);
 		fin.read((char*)&X,sizeof(Player));
 		X.DISP();
 		while(1>0)
