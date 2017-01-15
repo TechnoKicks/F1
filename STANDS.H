@@ -1,4 +1,3 @@
-
 struct stands
 {
 	int rank;
@@ -27,7 +26,7 @@ struct stands
 		cout<<point;
 	}
 	void show_stand();
-}stand;
+} stand;
 
 void stands::show_stand()
 {
@@ -49,11 +48,10 @@ void stands::show_stand()
 	gotoxy(60,25);
 	cout<<"Press Esc to Exit";
 	while(1>0)
-	{	ch=getch();
+	{
+		ch=getch();
 		if(ch==27)
-		{
 			break;
-		}
 	}
 }
 

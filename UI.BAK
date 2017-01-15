@@ -17,7 +17,6 @@
 #include"upcoming.h"
 #include"showbook.h"
 
-
 /*These Are The Global Variables Used In Program*/
 char getop;
 int op;
@@ -46,11 +45,14 @@ void myprofile()
 		show_editor();
 	else if(getop == '4')
 		usr.logout();
-
-
 }
+
 void home()
 {
+	int take;
+	textcolor(CYAN);
+	textbackground(BLACK);
+	char ch;
 g:	clrscr();
 	cout<<"\t\t\t\tHey , "<<usr.runame();
 	cout<<"\n\n\n\n\n\n";
@@ -63,6 +65,7 @@ g:	clrscr();
 	cout<<"\t\t7) My Profile\n\n";
 	cout<<"\t\t8) Exit";
 	getop = getch();
+
 	if(getop == '1')
 		stand.show_stand();
 	else if	(getop == '2')
@@ -72,70 +75,94 @@ g:	clrscr();
 	else if	(getop == '4')
 		show_search();
 	else if	(getop == '5')
-		next_race();
-	else if	(getop == '6')
 		{
-			if (usr.chk() == 1)
-				book();
-			else
-				{
-					clrscr();
-					gotoxy(30,12);
-					cout<<"Seems Like Youre Not Logged In.";
-					gotoxy(30,13);
-					cout<<"Press Any Key To Continue";
-					getch();
-					start1();
-				}
-		}
-	else if	(getop == '7')
-		{
-			if (usr.chk() == 1)
-				myprofile();
-			else
-				{
-					clrscr();
-					gotoxy(30,12);
-					cout<<"Seems Like Youre Not Logged In.";
-					gotoxy(30,13);
-					cout<<"Press Any Key To Continue";
-					getch();
-					start1();
-				}
-		}
-	else if (getop == '8')
-		{
-		ofstream fout;
-		fout.open("loggedin.dat",ios::out|ios::binary);
-		fout.write((char*)&usr,sizeof(usr));
-		fout.close();
-		exit(0);
-		}
-	goto g;
+			take = next_race();
+			if (take == 1)
+				goto z;
 
+
+		}
+
+	else if	(getop == '6')
+	{
+z:		if (usr.chk() == 1)
+			book();
+		else
+		{
+			clrscr();
+			gotoxy(30,12);
+			cout<<"Seems Like Youre Not Logged In.";
+			gotoxy(30,13);
+			cout<<"Press Any Key To Continue";
+			getch();
+			start1();
+		}
+	}
+
+	else if	(getop == '7')
+	{
+		if (usr.chk() == 1)
+			myprofile();
+		else
+		{
+			clrscr();
+			gotoxy(30,12);
+			cout<<"Seems Like Youre Not Logged In.";
+			gotoxy(30,13);
+			cout<<"Press Any Key To Continue";
+			getch();
+			start1();
+		 }
+	}
+
+	else if (getop == '8')
+	{
+		H:
+		clrscr();
+		cout<<"Want to Continue? (Y/N)  ";
+		ch=getch();
+		if(ch=='Y' || ch=='y')
+		{
+			ofstream fout;
+			fout.open("loggedin.dat",ios::out|ios::binary);
+			fout.write((char*)&usr,sizeof(usr));
+			fout.close();
+			exit(0);
+		}
+
+		else if(ch!='N' && ch!='n')
+		{
+			cout<<"Wrong Input !";
+			cout<<"\nPress again";
+			delay(500);
+			goto H;
+		}
+	}
+	goto g;
 }
 
 void start1()
 {
-
+	textcolor(CYAN);
+	textbackground(BLACK);
 	ifstream fin;
 	fin.open("loggedin.dat",ios::in|ios::binary);
 	user ob2;
 	fin.read((char*) &ob2 , sizeof(ob2));
 	if(strcmpi(usr.pu(),ob2.pu()) == 0)
 	{
-x:	clrscr();
-	cout<<"\n\n\n\tHey There , Wanna Sign Up ???  \n\n\n" ;
-	cout<<"\t\tSinging Up Has Its Own Advantages :\n\n";
-	cout<<"\t\t\t * Get Live Booking Option\n";
-	cout<<"\t\t\t * Access To Editing Option Of The Database\n";
-	cout<<"\t\t\t * And Few Surprises ";
-	cout<<"\n\n\n";
-	cout<<"\t\t\t1) Yea Sure , Why Not...\n";
-	cout<<"\t\t\t2) Nah , Any Other Day..\n";
-	cout<<"\t\t\t3) I Already Have An Account\n\t\t";
-	cout<<"\n\t\tEnter Your Choice : ";
-	cin>>op;
+x:		clrscr();
+		cout<<"\n\n\n\tHey There , Wanna Sign Up ???  \n\n\n" ;
+		cout<<"\t\tSinging Up Has Its Own Advantages :\n\n";
+		cout<<"\t\t\t * Get Live Booking Option\n";
+		cout<<"\t\t\t * Access To Editing Option Of The Database\n";
+		cout<<"\t\t\t * And Few Surprises ";
+		cout<<"\n\n\n";
+		cout<<"\t\t\t1) Yea Sure , Why Not...\n";
+		cout<<"\t\t\t2) Nah , Any Other Day..\n";
+		cout<<"\t\t\t3) I Already Have An Account\n\t\t";
+		cout<<"\n\t\tEnter Your Choice : ";
+		cin>>op;
 		if (op == 1)
 			signup();
 		else if (op == 2)
@@ -143,29 +170,30 @@ x:	clrscr();
 		else if(op == 3 )
 			login();
 		else
-			{
-				cout<<"\nPlease Enter Correct Choice";
-				cout<<"\nPress Any Key ";
-				getch();
-				goto x;
-			}
+		{
+			cout<<"\nPlease Enter Correct Choice";
+			cout<<"\nPress Any Key ";
+			getch();
+			goto x;
+		}
 	}
 
-
 	else
-		{       ifstream fin2;
-			fin2.open("newuser.dat",ios::binary|ios::in);
-			while(fin2)
+	{
+		ifstream fin2;
+		fin2.open("newuser.dat",ios::binary|ios::in);
+		while(fin2)
+		{
+			fin2.read((char*)&usr , sizeof(usr));
+			if(strcmp(ob2.pu(),usr.pu()) == 0)
 			{
-				fin2.read((char*)&usr , sizeof(usr));
-				if(strcmp(ob2.pu(),usr.pu()) == 0)
-				{
 				flag = 1;
 				break;
-				}
 			}
 		}
+	}
 }
+
 void main()
 {
 	start();

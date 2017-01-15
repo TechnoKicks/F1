@@ -2,7 +2,7 @@
 void edit_team(Team &OB)
 {
 	clrscr();
-	int x;
+	int x,i;
 	char ch;
 
 	edit_team:
@@ -19,17 +19,28 @@ void edit_team(Team &OB)
 
 	if(x==1)
 	{
+		x1:
 		clrscr();
 		cout<<"Enter New Team  Chief's Name:\t";
 		gets(OB.team_chief);
-
+		for(i=0; OB.team_chief[i]!='\0'; i++)
+		{
+			if(!isalpha(OB.team_chief[i]))
+				goto x1;
+		}
 	}
 
 	else if(x==2)
 	{
+		x2:
 		clrscr();
 		cout<<"Enter New Technical Chief's Name:\t";
 		gets(OB.tech_chief);
+		for(i=0; OB.tech_chief[i]!='\0'; i++)
+		{
+			if(!isalpha(OB.tech_chief[i]))
+				goto x2;
+		}
 
 	}
 
@@ -62,9 +73,7 @@ void edit_team(Team &OB)
 	}
 
 	else
-	{
 		goto edit_team;
-	}
 
 	gotoxy(50,22);
 	cout<<"Press Space to View";
@@ -126,9 +135,6 @@ void edit_team(Team &OB)
 			break;
 		}
 	}
-
-
-
 }
 
 void edit_play(Player &edit)
@@ -146,7 +152,6 @@ void edit_play(Player &edit)
 	cout<<"\n4. World Championships";
 	cout<<"\n5. Highest Finish";
 	cout<<"\n6. Highest Position";
-	cout<<"\n7. Whole Record\n\n";
 	cout<<"\nEnter Your Choice";
 	cin>>x;
 	if(x==1)
@@ -154,6 +159,10 @@ void edit_play(Player &edit)
 		clrscr();
 		cout<<"Enter New Podium Finishes:\t";
 		cin>>edit.podium;
+		while(kbhit())
+		{
+			getch();
+		}
 	}
 
 	else if(x==2)
@@ -161,6 +170,10 @@ void edit_play(Player &edit)
 		clrscr();
 		cout<<"Enter New Points:\t";
 		cin>>edit.point;
+		while(kbhit())
+		{
+			getch();
+		}
 	}
 
 	else if(x==3)
@@ -168,6 +181,10 @@ void edit_play(Player &edit)
 		clrscr();
 		cout<<"Enter Grand Prix Entered:\t";
 		cin>>edit.GP_enter;
+		while(kbhit())
+		{
+			getch();
+		}
 	}
 
 	else if(x==4)
@@ -175,6 +192,10 @@ void edit_play(Player &edit)
 		clrscr();
 		cout<<"Enter World Championship:\t";
 		cin>>edit.champion;
+		while(kbhit())
+		{
+			getch();
+		}
 	}
 
 	else if(x==5)
@@ -189,14 +210,10 @@ void edit_play(Player &edit)
 		clrscr();
 		cout<<"Enter Highest Position:\t";
 		cin>>edit.high_pos;
-	}
-
-
-	else if(x==7)
-	{
-		clrscr();
-		cout<<"Enter Whole New Record:\t";
-		edit.input();
+		while(kbhit())
+		{
+			getch();
+		}
 	}
 
 	else
@@ -271,7 +288,6 @@ void edit()
 {
 	clrscr();
 	cout<<"Help us updating our Records!";
-	//cout<<endl<<"Tell Us!";
 	char ch;
 	cout<<"\n\nPress Enter to Continue";
 	while(1>0)
@@ -361,6 +377,10 @@ void feed()
 	char ch[250];
 	cout<<"Enter Feedback\n";
 	gets(ch);
+	cout<<"\nThank you for your valuable feedback!";
+	cout<<"\nWe might contact you through mail, for improvements in";
+	cout<<"\nF1 Racing Hub";
+	getch();
 }
 
 void review()
@@ -393,7 +413,7 @@ void review()
 			y=4;
 			break;
 		}
-		else
+		else if(x=='5')
 		{
 			y=5;
 			break;
@@ -404,9 +424,29 @@ void review()
 		cout<<"* ";
 	}
 
-	cout<<"\nThanks for rating us with "<<y<<" Stars";
-	cout<<"\n_____________________________________\n";
-	cout<<"Enter Review";
+	if(y==1 || y==2)
+	{
+		cout<<"\nTell us the Problems you faced while using F1 Racing Hub\n";
+		cout<<"We will ensure you will not face problem that in next update";
+		cout<<"\n_____________________________________\n";
+		cout<<"Enter Review\n\n";
+	}
+
+	if(y==3 || y==4)
+	{
+		cout<<"\nThanks for Using and Reviewing F1 Racing Hub";
+		cout<<"\n_____________________________________\n";
+		cout<<"Enter Review\n\n";
+	}
+
+	if(y==5)
+	{
+		cout<<"\nWe are happy you liked our F1 Racing Hub";
+		cout<<"\nWe'll make sure that it gets better & better with future updates";
+		cout<<"\n_____________________________________\n";
+		cout<<"Enter Review\n\n";
+	}
+
 	gets(ch);
 }
 
@@ -421,7 +461,7 @@ void show_editor()
 	cout<<"1. Edit an Record";
 	cout<<"\n2. Feedback";
 	cout<<"\n3. Review Us";
-	cout<<"\n\nEnter your choice";
+	cout<<"\n\nEnter your choice:\t";
 	cin>>xy;
 	if(xy==1)
 		edit();

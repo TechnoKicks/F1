@@ -1,13 +1,5 @@
 #include"player_b.h"
 
-/*
-struct base
-{
-	char city[30];
-	char country[30];
-};
-*/
-
 struct player
 {
 	char NAME[30];

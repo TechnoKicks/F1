@@ -1,15 +1,5 @@
 #include"book.h"
 
-/*class class_book:public user
-{
-	public:
-	int x, y;
-	char wing;
-	// char *runame;
-};
-*/
-
-
 void layout(char wing[7][10], char ab)
 {
 	clrscr();
@@ -22,23 +12,19 @@ void layout(char wing[7][10], char ab)
 	cout<<"\b \b";
 	for (i=0; i<7; i++)
 	{
-			cout<<endl;
-			cout<<" "<<(char)(65 + i)<<" ";
-			for(j=0; j<10 ; j++)
-			{
-				if(wing[i][j]=='X')
-					cout<<"|_"<<wing[i][j]<<"_";
-				else
-					cout<<"|___";
-			}
-
-			cout<<"|";
-			cout<<endl;
+		cout<<endl;
+		cout<<" "<<(char)(65 + i)<<" ";
+		for(j=0; j<10 ; j++)
+		{
+			if(wing[i][j]=='X')
+				cout<<"|_"<<wing[i][j]<<"_";
+			else
+				cout<<"|___";
+		}
+		cout<<"|";
+		cout<<endl;
 	}
-
-
 }
-
 
 void show_book()
 {
@@ -63,11 +49,10 @@ void show_book()
 			wing[ob.x][ob.y]='X';
 		}
 	}
+
 	layout(wing, ob.wing);
 	fin.close();
 	getch();
-
-
 }
 
 

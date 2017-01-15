@@ -1,11 +1,12 @@
-
 void load()
-{       int x, y, i;
+{
+	int x, y, i;
 	char ch;
 	textbackground(CYAN);
 	textcolor(BLACK);
 	for(int f=0;f<2;f++)
-	{	clrscr();
+	{
+		clrscr();
 		x=1,y=-19;
 		gotoxy(33,13);
 		if(f==0)
@@ -103,41 +104,21 @@ void load()
 	cout<<"               ";
 	gotoxy(33,12);
 	cout<<"Getting Started";
-	delay(40);
+	delay(100);
 	gotoxy(33,12);
-	cout<<"               ";
+	cout<<"                ";
 	gotoxy(33,11);
 	cout<<"Getting Started";
-	gotoxy(33,18);
-	cout<<"    Login";
-	gotoxy(33,20);
-	cout<<"   Sign Up";
 	delay(40);
 	gotoxy(33,11);
-	cout<<"               ";
+	cout<<"                ";
 	gotoxy(33,9);
 	cout<<"Getting Started";
-	gotoxy(33,18);
-	cout<<"               ";
-	gotoxy(33,20);
-	cout<<"               ";
-	gotoxy(33,16);
-	cout<<"    Login";
-	gotoxy(33,18);
-	cout<<"   Sign Up";
 	delay(40);
 	gotoxy(33,9);
 	cout<<"               ";
 	gotoxy(33,7);
 	cout<<"Getting Started";
-	gotoxy(33,16);
-	cout<<"               ";
-	gotoxy(33,18);
-	cout<<"               ";
-	gotoxy(33,13);
-	cout<<"     Login ";
-	gotoxy(33,14);
-	cout<<"    Sign up";
 	delay(40);
 	gotoxy(33,7);
 	cout<<"               ";
@@ -147,25 +128,11 @@ void load()
 	cout<<"      to ";
 	gotoxy(33,7);
 	cout<<" F1 Racing Hub";
-	delay(40);
-	while(1>0)
-	{
-		ch=getch();
-		if(ch=='L'||ch=='l')
-		{
-			cout<<"Login Succesful";
-			break;
-		}
-		else if(ch=='S'||ch=='s')
-		{
-			cout<<"Enter Details";
-			break;
-		}
-	}
+	delay(2500);
+
 }
 
 void start()
 {
 	load();
-
 }
