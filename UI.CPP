@@ -21,124 +21,6 @@
 char getop;
 int op;
 
-/* These Are All The Functions used in program */
-void start1();
-void start0();
-
-void myprofile()
-{
-	clrscr();
-	cout<<"\t\t\t\tHey , "<<usr.runame();
-	cout<<"\n\n\n\n\n\n";
-	cout<<"\t\t1) My Bookings\n\n";
-	cout<<"\t\t2) Edit Records\n\n";
-	cout<<"\t\t3) Contact Us\n\n";
-	cout<<"\t\t4) Log Out";
-
-	getop = getch();
-
-	if (getop == '1')
-		show_book();
-	else if(getop == '2')
-		show_editor();
-	else if(getop == '3')
-		show_editor();
-	else if(getop == '4')
-		usr.logout();
-}
-
-void home()
-{
-	int take;
-	textcolor(CYAN);
-	textbackground(BLACK);
-	char ch;
-g:	clrscr();
-	cout<<"\t\t\t\tHey , "<<usr.runame();
-	cout<<"\n\n\n\n\n\n";
-	cout<<"\t\t1) Leaderboards\n\n";
-	cout<<"\t\t2) Player Bio\n\n";
-	cout<<"\t\t3) Team Bio\n\n";
-	cout<<"\t\t4) Search Database\n\n";
-	cout<<"\t\t5) Upcoming Events \n\n";
-	cout<<"\t\t6) Book Tickets \n\n";
-	cout<<"\t\t7) My Profile\n\n";
-	cout<<"\t\t8) Exit";
-	getop = getch();
-
-	if(getop == '1')
-		stand.show_stand();
-	else if	(getop == '2')
-		show_player();
-	else if	(getop == '3')
-		show_team();
-	else if	(getop == '4')
-		show_search();
-	else if	(getop == '5')
-		{
-			take = next_race();
-			if (take == 1)
-				goto z;
-		}
-
-	else if	(getop == '6')
-	{
-z:		if (usr.chk() == 1)
-			book();
-		else
-		{
-			clrscr();
-			gotoxy(30,12);
-			cout<<"Seems Like Youre Not Logged In.";
-			gotoxy(30,13);
-			cout<<"Press Any Key To Continue";
-			getch();
-			start1();
-		}
-	}
-
-	else if	(getop == '7')
-	{
-		if (usr.chk() == 1)
-			myprofile();
-		else
-		{
-			clrscr();
-			gotoxy(30,12);
-			cout<<"Seems Like Youre Not Logged In.";
-			gotoxy(30,13);
-			cout<<"Press Any Key To Continue";
-			getch();
-			start1();
-		 }
-	}
-
-	else if (getop == '8')
-	{
-		H:
-		clrscr();
-		cout<<"Want to Continue? (Y/N)  ";
-		ch=getch();
-		if(ch=='Y' || ch=='y')
-		{
-			ofstream fout;
-			fout.open("loggedin.dat",ios::out|ios::binary);
-			fout.write((char*)&usr,sizeof(usr));
-			fout.close();
-			exit(0);
-		}
-
-		else if(ch!='N' && ch!='n')
-		{
-			cout<<"Wrong Input !";
-			cout<<"\nPress again";
-			delay(500);
-			goto H;
-		}
-	}
-	goto g;
-}
-
 void start1()
 {
 	textcolor(CYAN);
@@ -192,9 +74,122 @@ x:		clrscr();
 	}
 }
 
+void myprofile()
+{
+	clrscr();
+	cout<<"\t\t\t\tHey , "<<usr.runame();
+	cout<<"\n\n\n\n\n\n";
+	cout<<"\t\t1) My Bookings\n\n";
+	cout<<"\t\t2) Edit Records\n\n";
+	cout<<"\t\t3) Contact Us\n\n";
+	cout<<"\t\t4) Log Out";
+
+	getop = getch();
+
+	if (getop == '1')
+		show_book();
+	else if(getop == '2')
+		show_editor();
+	else if(getop == '3')
+		show_editor();
+	else if(getop == '4')
+		usr.logout();
+}
+
+void home()
+{
+	int take;
+	textcolor(CYAN);
+	textbackground(BLACK);
+	char ch;
+g:	clrscr();
+	cout<<"\t\t\t\tHey , "<<usr.runame();
+	cout<<"\n\n\n\n\n\n";
+	cout<<"\t\t1) Leaderboards\n\n";
+	cout<<"\t\t2) Player Bio\n\n";
+	cout<<"\t\t3) Team Bio\n\n";
+	cout<<"\t\t4) Search Database\n\n";
+	cout<<"\t\t5) Upcoming Events \n\n";
+	cout<<"\t\t6) Book Tickets \n\n";
+
+	if(usr.chk() == 1)
+	cout<<"\t\t7) My Profile\n\n";
+	else
+	cout<<"\t\t7) Login\n\n";
+
+	cout<<"\t\t8) Exit";
+	getop = getch();
+
+	if(getop == '1')
+		stand.show_stand();
+	else if	(getop == '2')
+		show_player();
+	else if	(getop == '3')
+		show_team();
+	else if	(getop == '4')
+		show_search();
+	else if	(getop == '5')
+		{
+			take = next_race();
+			if (take == 1)
+				goto z;
+		}
+
+	else if	(getop == '6')
+	{
+z:		if (usr.chk() == 1)
+			book();
+		else
+		{
+			clrscr();
+			gotoxy(30,12);
+			cout<<"Seems Like Youre Not Logged In.";
+			gotoxy(30,13);
+			cout<<"Press Any Key To Continue";
+			getch();
+			start1();
+		}
+	}
+
+	else if	(getop == '7')
+	{
+		if (usr.chk() == 1)
+			myprofile();
+		else
+		 {
+			start1();
+		 }
+	}
+
+	else if (getop == '8')
+	{
+		H:
+		clrscr();
+		cout<<"Want to Continue? (Y/N)  ";
+		ch=getch();
+		if(ch=='Y' || ch=='y')
+		{
+			ofstream fout;
+			fout.open("loggedin.dat",ios::out|ios::binary);
+			fout.write((char*)&usr,sizeof(usr));
+			fout.close();
+			exit(0);
+		}
+
+		else if(ch!='N' && ch!='n')
+		{
+			cout<<"Wrong Input !";
+			cout<<"\nPress again";
+			delay(500);
+			goto H;
+		}
+	}
+	goto g;
+}
+
 void main()
 {
-	start();
+	load();
 	start1();
 	home();
 }
