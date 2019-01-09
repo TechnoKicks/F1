@@ -131,8 +131,3 @@ void load()
 	delay(2500);
 
 }
-
-void start()
-{
-	load();
-}
